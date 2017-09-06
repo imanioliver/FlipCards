@@ -7,9 +7,9 @@ module.exports = function(sequelize, DataTypes) {
 }, {});
 
 
-    Cards.associate = function(models){
+    Card.associate = function(models){
 
-        Cards.belongsTo(models.Deck,{
+        Card.belongsTo(models.Deck,{
             as: "Deck",
             foreignKey: "deckId"
         })

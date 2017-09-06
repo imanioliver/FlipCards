@@ -1,0 +1,21 @@
+<form class="" action="/login" method="post">
+  <input type="text" name="username" value="" placeholder="Username"><br>
+  <input type="password" name="password" value="" placeholder="Password"><br>
+  <button type="submit" name="button">Login</button>
+</form>
+{{#message}}
+  {{.}}
+{{/message}}
+OR
+
+<!-- <a href="/signup">Signup</a> -->
+
+
+<form class="" action="/signup" method="post">
+  <input type="text" name="username" value="" placeholder="Username"><br>
+  <input type="text" name="displayname" value="" placeholder="Display Name"><br>
+  <input type="text" name="name" value="" placeholder="Name"><br>
+  <input type="password" name="passwordHash" value="" placeholder="Password"><br>
+
+  <button type="submit" name="button">Signup</button>
+</form>
