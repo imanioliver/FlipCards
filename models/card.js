@@ -4,12 +4,15 @@ module.exports = function(sequelize, DataTypes) {
     deckId: DataTypes.INTEGER,
     front: DataTypes.STRING,
     back: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
+}, {});
+
+
+    Cards.associate = function(models){
+
+        Cards.belongsTo(models.Deck,{
+            as: "Deck",
+            foreignKey: "deckId"
+        })
     }
-  });
   return Card;
 };
