@@ -1,9 +1,23 @@
 <h1>This is the index</h1>
 
+
+<h3>Create a New Deck</h3>
+<form class="createDeck" action="/decks/create" method="post">
+    <p>Title: <input type="text" name="title" value=""></p>
+    <p>Description: <input type="text" name="description" value=""></p>
+    <button type="submit">Submit</button>
+</form>
+
+
 {{#data}}
-<div class="">
-    <p>{{title}}</p>
-    <p>{{description}}</p>
+<div class="deck">
+    <p id="titleText">{{title}}</p>
+    <p id="descriptionText">{{description}}</p>
+    <hr>
+    <br>
 </div>
+
+
+
 
 {{/data}}

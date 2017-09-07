@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 30;
+}
+
+.deck {
+    border: solid;
+    border-color: #F6AB02;
+    margin: 80px;
+    padding: 30px;
+}
+
+#titleText{
+    font-weight: bold;
+    color: black;
+    border-bottom: solid;
+    border-color: gray;
+    border-width: thin;
+}
+
+#descriptionText{
+    font-style: italic;
+    color: gray;
+}

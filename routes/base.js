@@ -79,19 +79,19 @@ router.get("/logout", function(req, res) {
     res.redirect("/");
 });
 
-router.post("/deck/create", function(req, res){
+router.post("/decks/create", function(req, res){
     Deck.create({
         title: req.body.title,
         description: req.body.description,
-        userId: 1
+        userId: req.body.user
     })
     .then(function(data){
-        res.render("index")
+        res.redirect("/decks")
     })
 
 })
 
-router.get("/decks", function(req, res){
+router.get("/decks", isAuthenticated, function(req, res){
     Deck.findAll({})
     .then(function(data){
         res.render("index", {data:data})
