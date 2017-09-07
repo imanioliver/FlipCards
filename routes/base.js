@@ -1,7 +1,7 @@
 const express   = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const Message = require("../models/index").Message;
+const User = require("../models/index").User;
 const Deck = require("../models/index").Deck;
 const Card = require("../models/index").Card;
 
@@ -18,18 +18,9 @@ const isAuthenticated = function (req, res, next) {
 
 
 router.get("/", isAuthenticated, function(req, res) {
-    Message.findAll({
-        include: [{
-                model: User,
-                as: "user"
-            },{
-                model:Deck,
-                as: "decks"
-            }]
-    ,
-    order: [['createdAt', 'DESC']]})
+    User.findAll({})
     .then(function(data) {
-        res.send("home page")
+        res.render("index")
     })
     .catch(function(err) {
         console.log(err);
@@ -37,7 +28,7 @@ router.get("/", isAuthenticated, function(req, res) {
     });
 });
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/decks',
     failureRedirect: '/entry',
     failureFlash: true
 }));
@@ -47,8 +38,8 @@ router.get("/entry", function(req, res) {
 });
 
 router.post("/signup", function(req, res) {
-    let name = req.body.username
-    let username = req.body.displayname
+    let name = req.body.name
+    let username = req.body.username
     let password = req.body.passwordHash
 
 
@@ -67,18 +58,45 @@ router.post("/signup", function(req, res) {
         salt: salt,
     }
 
-    User.create(newUser).then(function() {
-        res.redirect('/')
-    }).catch(function(error) {
+    User.create(newUser)
+    .then(function() {
+        res.redirect('/')})
+    .catch(function(error) {
         req.flash('error', "Please, choose a different username.")
         res.redirect('/entry')
     });
+
 });
+
+router.post('/', passport.authenticate('local', {
+    successRedirect: '/decks',
+    failureRedirect: '/',
+    failureFlash: true
+}));
 
 router.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
 });
+
+router.post("/deck/create", function(req, res){
+    Deck.create({
+        title: req.body.title,
+        description: req.body.description,
+        userId: 1
+    })
+    .then(function(data){
+        res.render("index")
+    })
+
+})
+
+router.get("/decks", function(req, res){
+    Deck.findAll({})
+    .then(function(data){
+        res.render("index", {data:data})
+    })
+})
 
 
 module.exports = router;
