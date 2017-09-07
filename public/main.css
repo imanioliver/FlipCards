@@ -1,13 +1,16 @@
 * {
     margin: 0;
     padding: 30;
+    border-radius: 10px;
+    font-family: 'Georgia', serif;
 }
 
-.deck {
+.decksOnHome {
     border: solid;
     border-color: #F6AB02;
     margin: 80px;
     padding: 30px;
+    /*box-shadow:*/
 }
 
 #titleText{
@@ -21,4 +24,59 @@
 #descriptionText{
     font-style: italic;
     color: gray;
+}
+
+.viewDeck{
+    border: solid;
+    border-color: #F6AB02;
+    padding: 10px;
+}
+
+a{
+    text-decoration-style: wavy;
+}
+
+
+.cardsOnDeck {
+    border: solid;
+    border-color: #2C6D1B;
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    width: 60%;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+#frontText{
+    border: solid;
+    border-color: #7C1E6A;
+    margin: 20px;
+    margin-left: 30px;
+    padding: 15px;
+    height: 200px;
+    width: 38%;
+    box-shadow: 10px 10px 5px #888888;
+    position: relative;
+
+}
+#frontInput{
+    color: #7C1E6A;
+}
+
+#backInput{
+    color:#D95404;
+}
+#backText{border: solid;
+border-color: #D95404;
+margin: 20px;
+padding: 15px;
+height: 200px;
+width: 38%;
+box-shadow: 10px 10px 5px #888888;
+position: relative;
+text-align: center;
+justify-content: center;
 }

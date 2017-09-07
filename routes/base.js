@@ -1,9 +1,9 @@
-const express   = require("express");
-const router = express.Router();
-const bcrypt = require("bcrypt");
-const User = require("../models/index").User;
-const Deck = require("../models/index").Deck;
-const Card = require("../models/index").Card;
+const express           = require("express");
+const router            = express.Router();
+const bcrypt            = require("bcrypt");
+const User              = require("../models/index").User;
+const Deck              = require("../models/index").Deck;
+const Card              = require("../models/index").Card;
 
 const passport = require('passport');
 
@@ -27,6 +27,7 @@ router.get("/", isAuthenticated, function(req, res) {
         res.send("error")
     });
 });
+
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/decks',
     failureRedirect: '/entry',
@@ -88,7 +89,6 @@ router.post("/decks/create", function(req, res){
     .then(function(data){
         res.redirect("/decks")
     })
-
 })
 
 router.get("/decks", isAuthenticated, function(req, res){
@@ -98,5 +98,38 @@ router.get("/decks", isAuthenticated, function(req, res){
     })
 })
 
+router.get("/decks/view/:id", isAuthenticated, function(req, res){
+    let deckId = req.params.id;
 
+    Deck.findById(deckId)
+    .then(function(deckData){
+        Card.findAll()
+        .then(function(cardData){
+            res.render("deck", {oneDeck:deckData, allCards:cardData})
+        })
+    })
+})
+
+router.get("/decks/card/{{id}}/edit", function(req, res){
+
+})
+
+router.post("/decks/cards/:id/create", function(req, res){
+
+    let deckId = req.params.id;
+
+    Card.create({
+        deckId: deckId,
+        front: req.body.front,
+        back: req.body.back
+    })
+    .then(function(data){
+        res.redirect("/decks/view/:id")
+    })
+    .catch(function(err){
+        console.log(err);
+        res.send(err)
+    })
+
+})
 module.exports = router;

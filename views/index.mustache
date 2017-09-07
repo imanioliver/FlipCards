@@ -8,16 +8,12 @@
     <button type="submit">Submit</button>
 </form>
 
-
 {{#data}}
-<div class="deck">
+<div class="decksOnHome">
     <p id="titleText">{{title}}</p>
     <p id="descriptionText">{{description}}</p>
     <hr>
     <br>
+    <a class="viewDeck" href="/decks/view/{{id}}">View Deck</a>
 </div>
-
-
-
-
 {{/data}}
