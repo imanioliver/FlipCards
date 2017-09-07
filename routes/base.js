@@ -16,7 +16,6 @@ const isAuthenticated = function (req, res, next) {
     res.redirect('/entry')
 };
 
-
 router.get("/", isAuthenticated, function(req, res) {
     User.findAll({})
     .then(function(data) {
@@ -101,18 +100,61 @@ router.get("/decks", isAuthenticated, function(req, res){
 router.get("/decks/view/:id", isAuthenticated, function(req, res){
     let deckId = req.params.id;
 
-    Deck.findById(deckId)
+    Deck.findOne({
+        where: {
+            id: deckId
+        },
+        include:[
+            {
+                model: Card,
+                as: "Cards"
+            }
+        ]
+    })
     .then(function(deckData){
-        Card.findAll()
+        console.log(deckData);
+        Card.findAll({
+
+            where: {
+                deckId : deckId
+            },
+            // include: [
+            //     {model:"Decks"}
+            // ],
+            order:[["updatedAt", "DESC"]]})
         .then(function(cardData){
             res.render("deck", {oneDeck:deckData, allCards:cardData})
         })
     })
 })
 
-router.get("/decks/card/{{id}}/edit", function(req, res){
+
+router.post("/decks/cards/:id/edit", function(req, res){
+
+    let cardId = req.params.id;
+
+
+        Card.update({
+            front: req.body.front,
+            back: req.body.back
+        },{
+            where: {
+                id: cardId
+            },
+            include:[{
+                model: "Decks",
+            }]
+        })
+        .then(function(data){
+            Card.findById(cardId)
+            .then(function(card){
+                res.redirect("/decks/view/" + card.deckId )
+            })
+        })
+
 
 })
+
 
 router.post("/decks/cards/:id/create", function(req, res){
 
@@ -124,7 +166,7 @@ router.post("/decks/cards/:id/create", function(req, res){
         back: req.body.back
     })
     .then(function(data){
-        res.redirect("/decks/view/:id")
+        res.redirect("/decks/view/" + deckId)
     })
     .catch(function(err){
         console.log(err);
@@ -132,4 +174,44 @@ router.post("/decks/cards/:id/create", function(req, res){
     })
 
 })
+
+
+router.get("/decks/:deckId/quiz", function(req, res){
+    let deckId = req.params.deckId;
+
+    Deck.findById(deckId)
+    .then(function(theDeck){
+        Card.findAll({
+            where: {
+                deckId: deckId
+            }
+        })
+        .then(function(cards){
+            // let cards = allCards;
+
+            let shuffleSet = [];
+
+            for (var i = 0; i < cards.length; i++) {
+
+                let splicedCard = cards.splice(Math.floor(Math.random()*cards.length), 1)[0]);
+                    shuffleSet.push(splicedCard)
+                    console.log(splicedCard);
+            }
+
+            let randomCard = cards[Math.floor(Math.random()*cards.length)];
+            res.send("works");
+            // res.redirect("/decks/"+ deckId+"/quiz/" + randomCard.id)
+        })
+    })
+})
+
+router.get("/decks/:deckId/quiz/:cardId", function(req,res) {
+    console.log(req.quiz);
+    res.send('card')
+    // randomCard = (cards[Math.floor(Math.random()*cards.length)]);
+})
+
+
+
+
 module.exports = router;

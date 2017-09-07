@@ -1,14 +1,16 @@
 <nav>
-    <a href="">All Decks</a>
+    <a href="/decks">All Decks</a>
+    <a href="/logout">Logout</a>
 </nav>
 
 
 <h1>Deck of Cards</h1>
+{{#oneDeck}}
+<a href="/decks/{{id}}/quiz">Quiz Yourself</a>
 
 
 <h3>Create a card</h3>
 
-{{#oneDeck}}
 <form class="createCardForm" action="/decks/cards/{{id}}/create" method="post">
     What would you like on the front of the card? <input id="frontInput" type="text" name="front" value=""><br>
     What would you like on the back of the card? <input id="backInput" type="text" name="back" value=""><br>
@@ -19,14 +21,23 @@
 {{#allCards}}
 
 <div class="cardsOnDeck">
-    <div class="frontOfCard">
-        <p id="frontText"> {{front}}</p>
-    </div>
-    <div class="backOfCard">
-        <p id="backText"> {{back}}</p>
-    </div>
-    <a href="/decks/card/{{id}}/edit">Edit Card</a>
-    <a href="/decks/card/{{id}}/delete">Delete</a>
+    <form class="" action="/decks/cards/{{id}}/edit" method="post">
+
+        <div class="frontOfCard">
+            <p id="frontText"> {{front}}</p>
+            <input id="editFront" type="text" name="front" value="{{front}}" placeholder="Change from {{front}}">
+        </div>
+        <br>
+        <hr>
+        <div class="backOfCard">
+            <p id="backText"> {{back}}</p>
+            <input id="editBack" type="text" name="back" value="{{back}}" placeholder="Change from {{back}}">
+        </div>
+        <div class="cardButtons">
+            <button type="submit" name="button">Edit Cards</button>
+            <a href="/decks/card/{{id}}/delete">Delete</a>
+        </div>
+    </form>
 </div>
 
 {{/allCards}}

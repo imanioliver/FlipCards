@@ -50,7 +50,7 @@ a{
     flex-direction: row;
 }
 
-#frontText{
+.frontOfCard{
     border: solid;
     border-color: #7C1E6A;
     margin: 20px;
@@ -59,24 +59,31 @@ a{
     height: 200px;
     width: 38%;
     box-shadow: 10px 10px 5px #888888;
-    position: relative;
+    flex-direction: row;
+
 
 }
 #frontInput{
-    color: #7C1E6A;
+    background-color: #7C1E6A;
+}
+#editFront{
+    width: 90%;
+}
+#editBack{
+    width: 90%;
 }
 
 #backInput{
-    color:#D95404;
+    background-color:#D95404;
 }
-#backText{border: solid;
+.backOfCard{border: solid;
 border-color: #D95404;
 margin: 20px;
 padding: 15px;
 height: 200px;
 width: 38%;
 box-shadow: 10px 10px 5px #888888;
-position: relative;
+flex-direction: row;
 text-align: center;
 justify-content: center;
 }
