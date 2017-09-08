@@ -77,13 +77,83 @@ a{
     background-color:#D95404;
 }
 .backOfCard{border: solid;
-border-color: #D95404;
-margin: 20px;
-padding: 15px;
-height: 200px;
-width: 38%;
-box-shadow: 10px 10px 5px #888888;
-flex-direction: row;
-text-align: center;
-justify-content: center;
+    border-color: #D95404;
+    margin: 20px;
+    padding: 15px;
+    height: 200px;
+    width: 38%;
+    box-shadow: 10px 10px 5px #888888;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000px;
+}
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+    /*border: solid;
+    width: 60%;
+    height: 50%;
+    border-width: thin;*/
+}
+
+.flip-container, .front, .back {
+    width: 320px;
+    height: 480px;
+    /*border: solid;
+    border-color: green;*/
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*border: solid;
+    width: 60%;
+    height: 50%;
+    border-width: thin;*/
+
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+    background-color: green;
+    border: solid;
+    /*
+    width: 60%;
+    height: 50%;
+    border-width: thin;*/
+    align-self: center;
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
+    background-color: red;
+    border: solid;
+    /*width: 60%;
+    height: 50%;
+    border-width: thin;*/
+    align-self: center;
 }

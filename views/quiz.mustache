@@ -1,13 +1,14 @@
 
 <h2>Welcome to the quiz!</h2>
-
-<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+{{#shuffle}}
+<div class="flip-container" ontouchstart="this.classList.toggle('click');">
 	<div class="flipper">
 		<div class="front">
-			<!-- front content -->
+            {{front}}
 		</div>
 		<div class="back">
-			<!-- back content -->
+            {{back}}
 		</div>
 	</div>
 </div>
+{{/shuffle}}

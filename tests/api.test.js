@@ -10,14 +10,23 @@ describe("GET /entry", function(){
     });
 });
 
-describe("GET /api/bro", function(){
-    test("should retrieve user id and username successfully", function(){
+describe("GET /api/decks", function(){
+    test("should retrieve all decks successfully", function(){
         return request(app)
             .get("/api/bro") //here you show what kind of request you're making and on what endpoint
             .expect(200)//status message you expect
             .then(function(res){
                 expect(res.body).toHaveProperty("id");
-                expect(res.body).toHaveProperty("username");
+                expect(res.body).toHaveProperty("deckId");
             });
     });
 });
+
+
+
+router.get("/api/decks", passport.authenticate('basic', { session: false }), function(req, res){
+    Deck.findAll({})
+    .then(function(data){
+        res.status(200).send(objectIt("success", "all decks found", data))
+    })
+})

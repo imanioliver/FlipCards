@@ -99,28 +99,14 @@ router.get("/decks", isAuthenticated, function(req, res){
 
 router.get("/decks/view/:id", isAuthenticated, function(req, res){
     let deckId = req.params.id;
-
     Deck.findOne({
-        where: {
-            id: deckId
-        },
-        include:[
-            {
-                model: Card,
-                as: "Cards"
-            }
-        ]
+        where: {id: deckId},
+        include:[{model: Card, as: "Cards"}]
     })
     .then(function(deckData){
         console.log(deckData);
         Card.findAll({
-
-            where: {
-                deckId : deckId
-            },
-            // include: [
-            //     {model:"Decks"}
-            // ],
+            where: {deckId : deckId},
             order:[["updatedAt", "DESC"]]})
         .then(function(cardData){
             res.render("deck", {oneDeck:deckData, allCards:cardData})
@@ -128,22 +114,15 @@ router.get("/decks/view/:id", isAuthenticated, function(req, res){
     })
 })
 
-
 router.post("/decks/cards/:id/edit", function(req, res){
-
     let cardId = req.params.id;
-
 
         Card.update({
             front: req.body.front,
             back: req.body.back
         },{
-            where: {
-                id: cardId
-            },
-            include:[{
-                model: "Decks",
-            }]
+            where: {id: cardId},
+            include:[{model: "Decks"}]
         })
         .then(function(data){
             Card.findById(cardId)
@@ -151,10 +130,31 @@ router.post("/decks/cards/:id/edit", function(req, res){
                 res.redirect("/decks/view/" + card.deckId )
             })
         })
+})
+
+router.get("/decks/cards/:id/delete", function(req, res){
+    let cardId= req.params.id;
+
+    Card.destroy({
+        where: {
+            id: cardId
+        },
+        include: [{
+            model: Deck,
+            as: "decks"
+        }]
+    })
+    .then(function(data){
+        console.log("data.Deck.id:       *****\n", data.Deck.id);
+        console.log("Deck.id:      *******\n", Deck.id);
+        res.send("works")
+        // res.redirect("/decks/view/"+ Deck.id)
+    })
+
+
 
 
 })
-
 
 router.post("/decks/cards/:id/create", function(req, res){
 
@@ -175,7 +175,6 @@ router.post("/decks/cards/:id/create", function(req, res){
 
 })
 
-
 router.get("/decks/:deckId/quiz", function(req, res){
     let deckId = req.params.deckId;
 
@@ -188,25 +187,36 @@ router.get("/decks/:deckId/quiz", function(req, res){
         })
         .then(function(cards){
             // let cards = allCards;
-
+            let length = cards.length;
             let shuffleSet = [];
 
-            for (var i = 0; i < cards.length; i++) {
-
-                let splicedCard = cards.splice(Math.floor(Math.random()*cards.length), 1)[0]);
+            for (var i = 0; i < length; i++) {
+                console.log("LENGTH OF CARDS DATA *****: ", cards.length);
+                console.log("the length of \"LENGTH\": ", length);
+                console.log("MATHFLOOR", Math.floor(Math.random()*cards.length));
+                let splicedCard = (cards.splice(Math.floor(Math.random()*cards.length), 1)[0]);
                     shuffleSet.push(splicedCard)
-                    console.log(splicedCard);
+                    console.log("THIS IS THE RANDOMLY SPLICED CARD: ", splicedCard);
             }
 
             let randomCard = cards[Math.floor(Math.random()*cards.length)];
-            res.send("works");
-            // res.redirect("/decks/"+ deckId+"/quiz/" + randomCard.id)
+            req.session.shuffleSet = shuffleSet;
+            console.log("this is REQ.SESSION.SHUFFLEsET: ", req.session.shuffleSet);
+            res.render("quiz", {shuffle:shuffleSet})
+            // res.send("works");
+            // res.redirect("/decks/"+ deckId+"/quiz/0")
         })
     })
 })
 
-router.get("/decks/:deckId/quiz/:cardId", function(req,res) {
-    console.log(req.quiz);
+router.get("/decks/:deckId/quiz/:cardIndex", function(req,res) {
+
+    if (req.session.shuffleSet.length === cardIndex) {
+        req.session.score=0/0
+        req.render("quizOver")
+    } else {
+        //game logic
+    }
     res.send('card')
     // randomCard = (cards[Math.floor(Math.random()*cards.length)]);
 })
