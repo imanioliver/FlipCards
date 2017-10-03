@@ -96,8 +96,8 @@ app.use(routesApi);
 
 
 if(require.main === module){
-    app.listen(3000, function() {
-        console.log("App is running on localhost:3000");
+    app.listen(3003, function() {
+        console.log("App is running on localhost:3003");
     });
 }
 

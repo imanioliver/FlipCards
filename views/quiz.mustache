@@ -1,14 +1,45 @@
 
 <h2>Welcome to the quiz!</h2>
 {{#shuffle}}
-<div class="flip-container" ontouchstart="this.classList.toggle('click');">
-	<div class="flipper">
-		<div class="front">
-            {{front}}
+
+
+<div class="fullPage">
+
+
+		<div class="quizArea" >
+			<div class="flipper">
+
+				<div class="front">
+		            {{front}}
+				</div>
+				<div class="back">
+		            {{back}}
+				</div>
+			</div>
 		</div>
-		<div class="back">
-            {{back}}
-		</div>
-	</div>
-</div>
 {{/shuffle}}
+		<div class="scoreKeeper">
+
+			<button type="button" name="button">Correct</button>
+			<button type="button" name="button">Incorrect</button>
+		</div>
+</div>
+
+
+
+<!-- <div class="yes">
+	<form class="" action="/yes" method="post">
+		<input type="text" name="" value="">
+	</form>
+</div>
+<div class="no">
+	<form class="" action="index.html" method="post">
+
+	</form>
+</div> -->
+
+
+
+<script type="text/javascript" scr="../public/quizScore.js">
+
+</script>

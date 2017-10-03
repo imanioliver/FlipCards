@@ -89,71 +89,103 @@ a{
 }
 
 
-/* entire container, keeps perspective */
-.flip-container {
-    perspective: 1000px;
-}
-/* flip the pane when hovered */
-.flip-container:hover .flipper, .flip-container.hover .flipper {
-    transform: rotateY(180deg);
-    /*border: solid;
-    width: 60%;
-    height: 50%;
-    border-width: thin;*/
+.flipper{
+    border: solid;
+    border-width: thin;
+    border-radius: 10px;
+    height: 300px;
+    width: 700px;
+
 }
 
+.flipper .front {
+    display: block;
+}
+
+
+
+.flipper:hover .front{
+    display: none
+}
+
+.flipper .back {
+    display: none;
+}
+
+
+.flipper:hover .back {
+    display: block;
+}
+
+
+
+/* entire container, keeps perspective */
+/*.flip-container {
+    perspective: 1000px;
+}*/
+/* flip the pane when hovered */
+/*.flip-container:click .flipper, .flip-container.click .flipper {
+    transform: rotateY(180deg);
+    border: solid;
+    width: 60%;
+    height: 50%;
+    border-width: thin;
+}*/
+/*
 .flip-container, .front, .back {
     width: 320px;
     height: 480px;
-    /*border: solid;
-    border-color: green;*/
-}
+    border: solid;
+    border-color: green;
+    display: flex;
+}*/
 
 /* flip speed goes here */
-.flipper {
+/*.flipper {
     transition: 0.6s;
     transform-style: preserve-3d;
 
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-}
+}*/
 
 /* hide back of pane during swap */
-.front, .back {
+/*.front, .back {
     backface-visibility: hidden;
 
     position: absolute;
     top: 0;
     left: 0;
-    /*border: solid;
+    border: solid;
     width: 60%;
     height: 50%;
-    border-width: thin;*/
+    border-width: thin;
+    margin: 50px
+}*/
 
-}
-
-/* front pane, placed above back */
-.front {
+/*front pane, placed above back */
+/*.front {
     z-index: 2;
-    /* for firefox 31 */
+     for firefox 31
     transform: rotateY(0deg);
     background-color: green;
     border: solid;
-    /*
+
     width: 60%;
     height: 50%;
-    border-width: thin;*/
+    border-width: thin;
     align-self: center;
-}
+}*/
 
 /* back, initially hidden pane */
-.back {
+/*.back {
     transform: rotateY(180deg);
     background-color: red;
     border: solid;
-    /*width: 60%;
+    width: 60%;
     height: 50%;
-    border-width: thin;*/
+    border-width: thin;
     align-self: center;
-}
+}*/
