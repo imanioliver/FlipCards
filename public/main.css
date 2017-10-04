@@ -88,7 +88,7 @@ a{
     justify-content: center;
 }
 
-
+/*styling for the quiz page*/
 .flipper{
     border: solid;
     border-width: thin;
@@ -118,74 +118,7 @@ a{
 }
 
 
-
-/* entire container, keeps perspective */
-/*.flip-container {
-    perspective: 1000px;
-}*/
-/* flip the pane when hovered */
-/*.flip-container:click .flipper, .flip-container.click .flipper {
-    transform: rotateY(180deg);
-    border: solid;
-    width: 60%;
-    height: 50%;
-    border-width: thin;
-}*/
-/*
-.flip-container, .front, .back {
-    width: 320px;
-    height: 480px;
-    border: solid;
-    border-color: green;
+.fullPage{
     display: flex;
-}*/
 
-/* flip speed goes here */
-/*.flipper {
-    transition: 0.6s;
-    transform-style: preserve-3d;
-
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}*/
-
-/* hide back of pane during swap */
-/*.front, .back {
-    backface-visibility: hidden;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: solid;
-    width: 60%;
-    height: 50%;
-    border-width: thin;
-    margin: 50px
-}*/
-
-/*front pane, placed above back */
-/*.front {
-    z-index: 2;
-     for firefox 31
-    transform: rotateY(0deg);
-    background-color: green;
-    border: solid;
-
-    width: 60%;
-    height: 50%;
-    border-width: thin;
-    align-self: center;
-}*/
-
-/* back, initially hidden pane */
-/*.back {
-    transform: rotateY(180deg);
-    background-color: red;
-    border: solid;
-    width: 60%;
-    height: 50%;
-    border-width: thin;
-    align-self: center;
-}*/
+}
