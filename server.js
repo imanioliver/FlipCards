@@ -20,6 +20,10 @@ const app               = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
+//Set port
+app.set('port', (process.env.PORT || 3000));
+
+
 app.engine("mustache", mustacheExpress());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "mustache");
@@ -96,8 +100,8 @@ app.use(routesApi);
 
 
 if(require.main === module){
-    app.listen(3003, function() {
-        console.log("App is running on localhost:3003");
+    app.listen(app.get('port'), function() {
+        console.log("App is running on port", app.get('port'));
     });
 }
 
