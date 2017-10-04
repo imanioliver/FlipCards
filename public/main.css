@@ -88,37 +88,61 @@ a{
     justify-content: center;
 }
 
-/*styling for the quiz page*/
-.flipper{
+
+
+
+.flashCards{
     border: solid;
     border-width: thin;
     border-radius: 10px;
     height: 300px;
-    width: 700px;
+    width: 400px;
+    margin: 30%;
+    text-align: center;
 
 }
 
-.flipper .front {
+.flashCards .front {
     display: block;
+
+}
+
+.flashCards:hover {
+    border-color: magenta;
+    border-width: medium;
+
 }
 
 
-
-.flipper:hover .front{
+.flashCards:hover .front{
     display: none
+    border-color: red;
 }
 
-.flipper .back {
+.flashCards .back {
     display: none;
 }
 
 
-.flipper:hover .back {
+.flashCards:hover .back {
     display: block;
+    border-color: red;
 }
 
-
+/*
 .fullPage{
     display: flex;
+    flex-direction: row;
 
+}*/
+
+#scoreDisplay {
+    position:fixed;
+    margin: 5%;
+    /*padding: 30%;*/
+}
+
+.theButtons {
+    position:fixed;
+    margin: 5%;
 }

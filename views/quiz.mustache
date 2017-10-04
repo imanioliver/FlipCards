@@ -1,29 +1,37 @@
 
-<h2>Welcome to the quiz!</h2>
-{{#shuffle}}
+
+<div>
+	<h1>Welcome to the quiz!</h1>
+
+</div>
+<div class="scoreKeeper">
+	<div class="theButtons">
+		<button id="correctButton" type="button" name="button">Correct</button>
+		<button id="incorrectButton" type="button" name="button">Incorrect</button><br><br><br>
+		<button type="button" name="button"><a href="/decks">Return Home</a></button>
+	</div>
+<br><br><br><br><br><br><br><br>
+	<div id="scoreDisplay"></div>
+	<br><br>
+
+</div>
 
 
-<div class="fullPage">
+	{{#shuffle}}
 
 
-		<div class="quizArea" >
-			<div class="flipper">
+		<div class="flashCards">
 
-				<div class="front">
-		            {{front}}
-				</div>
-				<div class="back">
-		            {{back}}
-				</div>
+			<div class="front">
+	            {{front}}
+			</div>
+			<div class="back">
+	            {{back}}
 			</div>
 		</div>
-{{/shuffle}}
-		<div class="scoreKeeper">
 
-			<button id="correctButton" type="button" name="button">Correct</button>
-			<button id="incorrectButton" type="button" name="button">Incorrect</button>
-		</div>
-</div>
+	{{/shuffle}}
+
 
 
 
